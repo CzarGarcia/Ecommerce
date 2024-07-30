@@ -18,6 +18,37 @@
 
     <!-- Styles -->
     @livewireStyles
+
+
+    <style>
+
+        .custom-swal-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            margin-right: 0.5rem;
+            overflow: hidden;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-align: center;
+            color: #1f2937; /* text-gray-900 */
+            border-radius: 0.5rem; /* rounded-lg */
+            background-image: linear-gradient(to bottom right, #ec4899, #fb923c); /* from-pink-500 to-orange-400 */
+            transition: all 0.3s ease-in-out;
+        }
+
+        .custom-swal-button:hover {
+            color: #ffffff; /* hover:text-white */
+            background-image: linear-gradient(to bottom right, #ec4899, #fb923c); /* group-hover:from-pink-500 group-hover:to-orange-400 */
+        }
+
+        .custom-swal-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.2); /* focus:ring-pink-200 */
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased" x-data="{ sidebarOpen: false }">
@@ -37,16 +68,16 @@
                 @include('layouts.partials.admin.breadcrumb')
 
                 @isset($action)
-                <div>
-                    {{$action}}
-                </div>
+                    <div>
+                        {{ $action }}
+                    </div>
                 @endisset
 
             </div>
 
 
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 ">
- 
+
 
 
                 {{ $slot }}
@@ -56,12 +87,21 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @stack('modals')
+    {{-- @stack('modals') --}}
 
     @livewireScripts
 
     @stack('js')
+
+    @if (session('swal'))
+        <script>
+            Swal.fire({!! json_encode(session('swal')) !!});
+        </script>
+    @endif
+
+
 </body>
 
 </html>

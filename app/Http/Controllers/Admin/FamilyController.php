@@ -36,6 +36,14 @@ class FamilyController extends Controller
 
         Family::create($request->all());
 
+        session()->flash('swal',[
+            'icon' => 'success',
+            'title' => 'Familia creada',
+            'text' => 'Familia creada correctamente',
+
+
+        ]);
+
         return redirect()->route('admin.families.index');
     }
 
@@ -66,7 +74,16 @@ class FamilyController extends Controller
 
         $family->update($request->all());
 
-        return redirect()->route('admin.families.edit', $family);
+
+        session()->flash('swal',[
+            'icon' => 'success',
+            'title' => 'Familia actualizada',
+            'text' => 'Familia actualizada correctamente',
+
+
+        ]);
+
+        return redirect()->route('admin.families.index', $family);
     }
 
     /**
@@ -74,6 +91,23 @@ class FamilyController extends Controller
      */
     public function destroy(Family $family)
     {
-        return "El";
+        if($family->categories->count() > 0){
+            session()->flash('swal', [
+                'icon' => 'error',
+                'title' => 'Familia no eliminada',
+                'text' => 'La familia tiene categorías asociadas',
+                'confirmButtonText' => 'De acuerdo',
+                'confirmButtonClass' => 'custom-swal-button'
+            ]);
+            return redirect()->route('admin.families.edit', $family);
+        }
+
+        $family->delete();
+
+
+        return redirect()->route('admin.families.index');
     }
 }
+
+
+
