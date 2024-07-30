@@ -1,0 +1,14 @@
+.btn{
+    @apply font-bold px-4 py-2 rounded;
+}
+
+.btn-blue{
+    @apply bg-blue-500 text-white hover:bg-blue-400;
+}
+
+.btn-red{
+    @apply bg-red-500 text-white hover:bg-red-400;
+}
+.btn-green{
+    @apply bg-green-500 text-white hover:bg-green-400;
+}
