@@ -13,7 +13,15 @@ $links = [
       'name'=> 'Familias',
       'route'=> route('admin.families.index'),
       'active'=> request()->routeIs('admin.families.*')
-   ]
+    ],
+    [
+        'icon'=> 'fa-solid fa-list',
+        'name'=> 'Categorias',
+        'route'=> route('admin.categories.index'),
+        'active'=> request()->routeIs('admin.categories.*')
+
+    ]
+
 ];
 
 @endphp
@@ -27,10 +35,10 @@ $links = [
          @foreach($links as $link)
             <li>
                <a href="{{$link['route']}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ $link['active'] ? 'bg-gray-500' : ''}}">
-                
+
                   <span class="inline-flex w-6 h-6 justify-center items-center"><i class="{{$link['icon']}} text-gray"></i></span>
                   <span class="ms-2">{{$link['name']}}</span>
-                  
+
                </a>
             </li>
          @endforeach

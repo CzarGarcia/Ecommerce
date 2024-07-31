@@ -78,11 +78,11 @@
                     cancelButtonText: "No, cancelar",
                     reverseButtons: true,
                     backdrop: `
-        rgba(0,0,123,0.4)
-        url("/PYh.gif")
-        left top
-        no-repeat
-    `
+                        rgba(0,0,123,0.4)
+                        url("/PYh.gif")
+                        left top
+                        no-repeat
+                        `
                 }).then((result) => {
                     if (result.isConfirmed) {
                         swalWithBootstrapButtons.fire({
