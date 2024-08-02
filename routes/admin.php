@@ -10,5 +10,4 @@ Route::get('/', function () {
 })->name('admin.dashboard');
 
 Route::resource('families', FamilyController::class);
-
 Route::resource('categories', CategoryController::class);

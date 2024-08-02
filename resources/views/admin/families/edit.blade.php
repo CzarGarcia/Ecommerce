@@ -13,6 +13,8 @@
 ]">
 
     <div class="bg-white rounded-lg shadow-lg p-6">
+
+        <x-validation-errors class="mb-4" :errors="$errors" />
         <form action="{{ route('admin.families.update', $family) }}" method="post">
             @csrf
             @method('PUT')

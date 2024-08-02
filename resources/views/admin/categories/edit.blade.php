@@ -4,27 +4,42 @@
         'route' => route('admin.admin.dashboard'),
     ],
     [
-        'name' => 'Familias',
-        'route' => route('admin.families.index'),
+        'name' => 'Categorias',
+        'route' => route('admin.categories.index'),
     ],
     [
-        'name' => 'Crear',
+        'name' => 'Editar - ' . $category->name,
     ],
 ]">
 
+
+<div class="card">
+
     <div class="bg-white rounded-lg shadow-lg p-6">
-        <form action="{{ route('admin.families.store') }}" method="post">
+        <form action="{{ route('admin.categories.update', $category) }}" method="post">
             @csrf
+            @method('PUT')
             <div class="mb-4">
-
                 <x-validation-errors class="mb-4" :errors="$errors" />
-
 
                 <x-label class="mb-2">
                     Nombre
                 </x-label>
                 <x-input class="w-full" placeholder="Ingrese el nombre de la familia" name="name"
-                    value="{{ old('name') }}" />
+                    value="{{ old('name', $category) }}" />
+            </div>
+            <div class="mb-4">
+                <x-label class="mb-2">
+                    Categoria
+                </x-label>
+                <x-select name="family_id" id="family_id" class="w-full">
+                    @foreach ($families as $family)
+                    <option value="{{ $family->id }}"
+                        @selected(old('family_id', $category->family_id) == $family->id)>
+                        {{ $family->name }}
+                    </option>
+                @endforeach
+                </x-select>
             </div>
             <div class="flex justify-end">
                 <button
@@ -39,4 +54,5 @@
 
     </div>
 
+</div>
 </x-admin-layout>
