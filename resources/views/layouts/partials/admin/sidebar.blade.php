@@ -14,17 +14,24 @@
             'active' => request()->routeIs('admin.families.*'),
         ],
         [
-            'icon' => 'fa-solid fa-list',
+            'icon' => 'fa-solid fa-tags',
             'name' => 'Categorias',
             'route' => route('admin.categories.index'),
             'active' => request()->routeIs('admin.categories.*'),
         ],
         [
-            'icon' => 'fa-solid fa-list',
+            'icon' => 'fa-solid fa-tag',
             'name' => 'Subcategorías',
             'route' => route('admin.subcategories.index'),
             'active' => request()->routeIs('admin.subcategories.*'),
         ],
+        [
+            'icon' => 'fa-solid fa-boxes-stacked',
+            'name' => 'Productos',
+            'route' => route('admin.products.index'),
+            'active' => request()->routeIs('admin.products.*'),
+        ],
+
     ];
 
 @endphp

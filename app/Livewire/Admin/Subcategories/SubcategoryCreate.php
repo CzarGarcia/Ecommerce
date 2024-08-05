@@ -27,7 +27,7 @@ class SubcategoryCreate extends Component
     public function mount()
     {
         $this->families = Family::all();
-        
+
     }
 
     #[Computed()]
@@ -54,14 +54,14 @@ class SubcategoryCreate extends Component
 
         Subcategory::create($this->subcategory);
 
-        
+
         session()->flash('swal',[
             'icon' => 'success',
             'title' => 'Categoría creada',
             'text' => 'Categoría creada correctamente',
         ]);
-    
+
         return redirect()->route('admin.subcategories.index');
     }
-  
+
 }

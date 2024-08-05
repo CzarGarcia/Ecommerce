@@ -8,7 +8,7 @@
         'route' => route('admin.subcategories.index'),
     ],
     [
-        'name' => 'Crear',
+        'name' => 'Crear' ,
     ],
 ]">
 
