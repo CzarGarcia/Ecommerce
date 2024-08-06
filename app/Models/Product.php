@@ -19,7 +19,7 @@ class Product extends Model
     ];
     // Relacion uno a muchos inversa
     public function Subcategory(){
-        return $this->HasMany(Subcategory::class);
+        return $this->belongsTo(Subcategory::class);
     }
 
     // Relacion uno a muchos

@@ -43,6 +43,9 @@
                     Precio
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Imagen
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Acción
                 </th>
 
@@ -67,7 +70,11 @@
                     <td class="px-6 py-4">
                         {{ $product->price }}
                     </td>
+                    <td class="px-6 py-4">
 
+
+                          <img src="{{ Storage::url($product->image_path) }}" class="w-16 h-16 object-cover">
+                    </td>
                     <td class="px-6 py-4">
                         <a href="{{ route('admin.products.edit', $product) }}"
                             class="text-indigo-600 hover:text-indigo-900">Editar</a>
