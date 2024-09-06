@@ -6,6 +6,9 @@
         </x-slot>
 
         <x-slot name="content">
+
+            <x-validation-errors class="mb-4" />
+
             <div class="grid grid-cols-2 gap-6 mb-4">
 
                 <div>
@@ -38,8 +41,9 @@
 
                         <div class="absolute -top-3  bg-white">
                             <button wire:click="removeFeature({{ $index }})"
-                             class="relative inline-flex items-center justify-center p-0.5 mb-2 me-1 overflow-hidden text-sm font-medium text-red-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-red text-red focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-                                <span class="relative px-1 py-0.5 transition-all ease-in duration-75 bg-red-100 rounded-md group-hover:bg-opacity-0 text-red-500">
+                                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-1 overflow-hidden text-sm font-medium text-red-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-red text-red focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                                <span
+                                    class="relative px-1 py-0.5 transition-all ease-in duration-75 bg-red-100 rounded-md group-hover:bg-opacity-0 text-red-500">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </span>
                             </button>
@@ -53,22 +57,22 @@
 
                                 @switch($newOption['type'])
                                     @case(1)
+                                        <x-input class="w-full" wire:model="newOption.features.{{ $index }}.value"
+                                            placeholder="Ingresa el valor de la opción" />
 
-                                    <x-input class="w-full" wire:model="newOption.features.{{ $index }}.value"
-                                    placeholder="Ingresa el valor de la opción" />
-
-                                        @break
-                                    @case(2)
-                                    <div class="border border-gray-300 rounded-md h-[42px] flex items-center justify-between px-3">
-
-                                        {{ $newOption['features'][$index]['value'] ?: 'Seleccione un color' }}
-
-                                        <input type="color" wire:model.live="newOption.features.{{ $index }}.value" class="">
-
-                                    </div>
                                     @break
-                                    @default
 
+                                    @case(2)
+                                        <div
+                                            class="border border-gray-300 rounded-md h-[42px] flex items-center justify-between px-3">
+
+                                            {{ $newOption['features'][$index]['value'] ?: 'Seleccione un color' }}
+
+                                            <input type="color" wire:model.live="newOption.features.{{ $index }}.value" class="">
+                                        </div>
+                                    @break
+
+                                    @default
                                 @endswitch
                             </div>
 
@@ -100,6 +104,13 @@
 
         <x-slot name="footer">
             <!-- Contenido del pie de página -->
+            <button wire:click.prevent="addOption"
+                class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                <span
+                    class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    Guardar
+                </span>
+            </button>
         </x-slot>
 
     </x-dialog-modal>

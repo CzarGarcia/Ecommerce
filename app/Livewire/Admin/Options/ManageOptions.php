@@ -9,13 +9,12 @@ class ManageOptions extends Component
 {
 
     public $options;
-    public $createModal = true;
+    public $createModal = false;
     public $newOption = [
         'name' => '',
         'type' => 1,
         'features' => [
             [
-
                 'value' => '',
                 'description' => ''
             ],
@@ -37,6 +36,54 @@ class ManageOptions extends Component
                 'value' => '',
                 'description' => ''
             ];
+    }
+    public function addOption()
+    {
+
+        $rules = [
+            'newOption.name' => 'required',
+            'newOption.type' => 'required|in:1,2',
+            'newOption.features.*.value' => 'required',
+            'newOption.features.*.description' => 'required',
+        ];
+
+        //IREALIZAMOS LA VALIDACION
+        foreach ($this->newOption['features'] as $index => $feature) {
+            $rules['newOption.features.' . $index . '.value'] = 'required';
+            if($this->newOption['type'] == 1){
+                $rules['newOption.features.' . $index . '.value'] = 'required';
+            } else{
+                $rules['newOption.features.' . $index . '.value'] = 'required|regex:/^#[a-f0-9]{6}$/i';
+            }
+            $rules['newOption.features.' . $index . '.description'] = 'required|max:255';
+        }
+
+        $this->validate($rules);
+
+
+        $option = Option::create([
+            'name' => $this->newOption['name'],
+            'type' => $this->newOption['type'],
+        ]);
+
+        foreach ($this->newOption['features'] as $feature) {
+            $option->features()->create([
+                'value' => $feature['value'],
+                'description' => $feature['description'],
+            ]);
+        }
+
+        $this->options = Option::with('features')->get();
+
+        $this->reset('newOption', 'createModal');
+
+        $this->dispatch('swal:modal', [
+            'title' => 'Opcion creada',
+            'text' => 'Se ha creado la opcion correctamente',
+            'type' => 'success',
+            'timeout' => 3000,
+        ]);
+
     }
 
     public function removeFeature($index)
