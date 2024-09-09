@@ -36,7 +36,7 @@
             </div>
 
             <div class="mb-4 space-y-4">
-                @foreach ($newOption['features'] as $index => $feature)
+                @foreach ($newOption->features as $index => $feature)
                     <div wire:key="features-{{ $index }}" class="p-6 rounded-lg border border-gray-200 relative">
 
                         <div class="absolute -top-3  bg-white">
@@ -55,8 +55,9 @@
                                     Valor
                                 </x-label>
 
-                                @switch($newOption['type'])
+                                @switch($newOption->type)
                                     @case(1)
+                                    @case(3)
                                         <x-input class="w-full" wire:model="newOption.features.{{ $index }}.value"
                                             placeholder="Ingresa el valor de la opción" />
 
@@ -66,12 +67,12 @@
                                         <div
                                             class="border border-gray-300 rounded-md h-[42px] flex items-center justify-between px-3">
 
-                                            {{ $newOption['features'][$index]['value'] ?: 'Seleccione un color' }}
+                                            {{ $newOption->features[$index]['value'] ?: 'Seleccione un color' }}
 
                                             <input type="color" wire:model.live="newOption.features.{{ $index }}.value" class="">
                                         </div>
                                     @break
-
+3
                                     @default
                                 @endswitch
                             </div>
